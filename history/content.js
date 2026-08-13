@@ -283,3 +283,137 @@ const BUILD = {
   ],
   done: "The wall is complete. Everything in it came out of your answers."
 };
+
+
+/* ---------------------------------------------------------------------------
+   Extra rungs BELOW Grade 5, used only by bump-it-up.html. They are kept out
+   of LEVELS on purpose: the wall, the level sheets and the PDFs are built for
+   six columns, and eleven would wreck them. The screen tool walks
+   EARLY_LEVELS.concat(LEVELS) and reads examples from whichever object has
+   them, so nothing is duplicated.
+
+   Criteria appear one at a time on the way up. That is the point of the
+   ladder, not an omission: at Prep you can only name the thing you can see.
+   --------------------------------------------------------------------------- */
+
+const EARLY_LEVELS = ["Prep", "Year 1", "Year 2", "Year 3", "Year 4"];
+
+const EARLY_EXAMPLES = {
+ "Prep": "This is a {source|rock}. I can see {source|lines} on it. It is {context|very old}.",
+ "Year 1": "This rock is a {source|tool}. I can see {source|deep lines} and {source|shiny bits}. People used it {context|a long time ago} to crush food.",
+ "Year 2": "This rock is an {source|old stone tool} from a place called Madjedbebe. It has {source|deep lines and shiny patches}. People used it {context|long ago to grind seeds}. It shows us that {judge|they made food here}. It cannot tell us {judge|their names}.",
+ "Year 3": "GS73 is an {source|old stone tool}. It was {source|found in the ground at Madjedbebe}. It has {source|deep grooves and shiny patches}. People used stones like this {context|to grind seeds into food}. Some people who study the past think {evidence|the stone is very old}. Others {evidence|are not sure}. The stone shows us {judge|people made food here}, but it cannot tell us {judge|who they were}.",
+ "Year 4": "GS73 is an {source|old grinding stone} that was {source|dug up at Madjedbebe, on Mirarr Country}. Photos show {source|deep grooves and shiny patches}. Long ago, people {context|used stones like this to grind hard seeds into food}. Some researchers think {evidence|the ground it sat in is very old}. Others think {evidence|the soil has moved, so they are not sure}. The stone is {judge|good evidence that people ground food here}, but it {judge|cannot tell us which plants they used}. I {meta|read my work again} and made sure I did not say more than the rock really shows."
+};
+
+const EARLY_EXPLANATIONS = {
+ "Prep": {
+   source:  "Names the object and one thing you can see on it.",
+   context: "Says that it comes from a long time ago." },
+ "Year 1": {
+   source:  "Calls it a tool, and names two things you can see.",
+   context: "Says when it was used and what it was used for." },
+ "Year 2": {
+   source:  "Names the object and the place it came from.",
+   context: "Says what people did with it: grinding seeds.",
+   judge:   "Says one thing the rock shows, and one thing it cannot tell us." },
+ "Year 3": {
+   source:  "Uses the object's real name, and says it was found in the ground.",
+   context: "Explains what grinding was for.",
+   evidence:"Notices that people who study the past do not all agree.",
+   judge:   "Separates what the stone shows from what it cannot show." },
+ "Year 4": {
+   source:  "Says what the object is and how we got it.",
+   context: "Explains why grinding mattered: hard seeds become food.",
+   evidence:"Gives both sides of the argument about the age, with a reason for each.",
+   judge:   "Says what the stone is good evidence for, and where it stops.",
+   meta:    "Shows a real check: re-reading, and not claiming more than the source allows." }
+};
+
+/* What is new at each rung, and what a student has to know to make the jump.
+   Both are shown on bump-it-up.html, the background knowledge behind a toggle. */
+const BUMP = {
+ "Prep":    { new:"You name the object, and one thing you can see on it.",
+              background:"That old objects can tell us about people who lived before us." },
+ "Year 1":  { new:"You say what it was used for.",
+              background:"That a tool is something people use to get a job done." },
+ "Year 2":  { new:"You name the place, and you say one thing the rock cannot tell us.",
+              background:"That Madjedbebe is a real place, and that grinding turns hard seeds into food." },
+ "Year 3":  { new:"You say that the people who study the past do not all agree.",
+              background:"That experts can look at the same object and reach different conclusions." },
+ "Year 4":  { new:"You check your own writing, and you give a reason for each side of the argument.",
+              background:"That soil builds up in layers, and things buried deeper are usually older." },
+ "Grade 5": { new:"You choose careful words, like ‘may have’, so you do not claim too much.",
+              background:"The difference between what you can see and what you are working out." },
+ "Year 6":  { new:"You name the type of source, and you give both positions on its age.",
+              background:"That archaeologists date the layer the object sat in, not the object itself." },
+ "Year 7":  { new:"You separate the ancient object from the modern record of it, and you say why that record was made.",
+              background:"That a scientific figure is made by researchers for a purpose, and that 65,000 years is the modelled age of the layer." },
+ "Year 8":  { new:"You attach each interpretation to the evidence behind it, and you ask reliability questions.",
+              background:"That Clarkson and Williams disagree about how the site formed, and that residues can be contaminated by modern material." },
+ "Year 9":  { new:"You explain why several kinds of evidence together are stronger than one, and you rank your claims.",
+              background:"What independent evidence means, and that what survives in the ground depends on preservation." },
+ "Year 10": { new:"You read the argument the publication is making underneath its evidence, and you explain why the experts differ.",
+              background:"That researchers' values shape their work, and that permission from Mirarr custodians is part of how this research was done." }
+};
+
+/* Tier 3 = the subject's own words, which need a definition.
+   Tier 2 = general academic words, which need a plainer synonym.
+   Matched case-insensitively on whole words wherever they appear. */
+const GLOSS = {
+ tier3: {
+  "artefact":"An object made or used by people in the past.",
+  "grinding stone":"A stone that people rub against another stone to crush seeds into flour.",
+  "millstone":"The lower, fixed stone of a grinding pair. The smaller stone is worked against it.",
+  "excavated":"Carefully dug out of the ground by archaeologists.",
+  "Madjedbebe":"A rock shelter in northern Australia where people have lived for tens of thousands of years.",
+  "Mirarr":"The Aboriginal people whose Country Madjedbebe sits on.",
+  "Phase 2":"The name archaeologists gave to one layer of soil at the site.",
+  "sediment":"Sand, soil and dust that settles in layers over time.",
+  "residues":"Tiny traces of something left behind on a surface.",
+  "starch grains":"Microscopic grains from a plant. Finding them shows plants were being processed.",
+  "micrographs":"Photographs taken through a microscope.",
+  "archaeologists":"People who study the past by digging up and examining what earlier people left behind.",
+  "chronology":"The order and dates of when things happened.",
+  "custodians":"The people responsible for looking after Country and the knowledge belonging to it.",
+  "contamination":"Something modern getting into an old sample by accident.",
+  "striations":"Fine scratch lines left on a surface by rubbing.",
+  "polish":"A shine worn onto the raised parts of grains by using a stone over and over."
+ },
+ tier2: {
+  "ancient":"very old",
+  "evidence":"proof · signs",
+  "interpret":"work out what it means",
+  "interpretation":"what someone thinks it means",
+  "reliable":"can be trusted",
+  "contested":"argued about",
+  "converge":"point the same way",
+  "qualified":"limited · with conditions",
+  "independent":"separate · not connected",
+  "purpose":"the reason it was made",
+  "context":"the time and place around it",
+  "argue":"give reasons for",
+  "supports":"backs up",
+  "suggests":"hints at",
+  "identify":"name · point out",
+  "describe":"say what it is like",
+  "analyse":"break it down and examine it",
+  "evaluate":"judge how good it is",
+  "justify":"give good reasons for",
+  "recovered":"found and taken out",
+  "occupied":"lived in"
+ }
+};
+
+/* Clickable regions on gs73-source-panel.jpg, as percentages of the image.
+   The plate is a 2x2 of the same object at four magnifications. */
+const HOTSPOTS = [
+ { x:2,  y:2,  w:46, h:50, label:"The artefact",
+   text:"GS73 itself, photographed with a five-centimetre scale bar. The white arrows point to the worn areas." },
+ { x:50, y:2,  w:48, h:50, label:"Low magnification",
+   text:"The same surface, magnified. Now you can see striations — fine scratch lines — and quartz grains levelled flat by rubbing." },
+ { x:4,  y:54, w:44, h:44, label:"Microscope view r",
+   text:"Bright polish on the raised parts of single grains. Polish like this builds up when a stone is used again and again." },
+ { x:50, y:54, w:48, h:44, label:"Microscope view s",
+   text:"A second microscope view, from a different spot on the stone. Two views agreeing makes the reading stronger than one view alone." }
+];
