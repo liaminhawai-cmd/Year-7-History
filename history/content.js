@@ -296,65 +296,81 @@ const BUILD = {
    ladder, not an omission: at Prep you can only name the thing you can see.
    --------------------------------------------------------------------------- */
 
-const EARLY_LEVELS = ["Prep", "Year 1", "Year 2", "Year 3", "Year 4"];
+const EARLY_LEVELS = ["Foundation to Level 2", "Levels 3 and 4"];
+
+/* Two rungs, not five. The Victorian Curriculum bands History in two-year
+   blocks and draws no distinction between Foundation and Level 2, or between
+   Levels 3 and 4, so inventing a rung per year would be inventing precision
+   the curriculum does not have. */
 
 const EARLY_EXAMPLES = {
- "Prep": "This is a {source|rock}. I can see {source|lines} on it. It is {context|very old}.",
- "Year 1": "This rock is a {source|tool}. I can see {source|deep lines} and {source|shiny bits}. People used it {context|a long time ago} to crush food.",
- "Year 2": "This rock is an {source|old stone tool} from a place called Madjedbebe. It has {source|deep lines and shiny patches}. People used it {context|long ago to grind seeds}. It shows us that {judge|they made food here}. It cannot tell us {judge|their names}.",
- "Year 3": "GS73 is an {source|old stone tool}. It was {source|found in the ground at Madjedbebe}. It has {source|deep grooves and shiny patches}. People used stones like this {context|to grind seeds into food}. Some people who study the past think {evidence|the stone is very old}. Others {evidence|are not sure}. The stone shows us {judge|people made food here}, but it cannot tell us {judge|who they were}.",
- "Year 4": "GS73 is an {source|old grinding stone} that was {source|dug up at Madjedbebe, on Mirarr Country}. Photos show {source|deep grooves and shiny patches}. Long ago, people {context|used stones like this to grind hard seeds into food}. Some researchers think {evidence|the ground it sat in is very old}. Others think {evidence|the soil has moved, so they are not sure}. The stone is {judge|good evidence that people ground food here}, but it {judge|cannot tell us which plants they used}. I {meta|read my work again} and made sure I did not say more than the rock really shows."
+ "Foundation to Level 2":
+`This is a rock. It has {source|deep lines} on it. Some parts are {source|shiny}. Someone {context|held it and rubbed it to make food}.`,
+
+ "Levels 3 and 4":
+`GS73 is an {source|old grinding stone} found at Madjedbebe. It has {source|deep grooves and shiny patches}. The people who used it were {context|grinding hard seeds to make food}. Some researchers say {evidence|the stone is very old}. Others say {evidence|the soil has moved, so they are not sure}.`
 };
 
 const EARLY_EXPLANATIONS = {
- "Prep": {
-   source:  "Names the object and one thing you can see on it.",
-   context: "Says that it comes from a long time ago." },
- "Year 1": {
-   source:  "Calls it a tool, and names two things you can see.",
-   context: "Says when it was used and what it was used for." },
- "Year 2": {
-   source:  "Names the object and the place it came from.",
-   context: "Says what people did with it: grinding seeds.",
-   judge:   "Says one thing the rock shows, and one thing it cannot tell us." },
- "Year 3": {
-   source:  "Uses the object's real name, and says it was found in the ground.",
-   context: "Explains what grinding was for.",
-   evidence:"Notices that people who study the past do not all agree.",
-   judge:   "Separates what the stone shows from what it cannot show." },
- "Year 4": {
-   source:  "Says what the object is and how we got it.",
-   context: "Explains why grinding mattered: hard seeds become food.",
-   evidence:"Gives both sides of the argument about the age, with a reason for each.",
-   judge:   "Says what the stone is good evidence for, and where it stops.",
-   meta:    "Shows a real check: re-reading, and not claiming more than the source allows." }
+ "Foundation to Level 2": {
+   source:  "Identifies features you can see on the source itself: the lines, and the shine (VC2HH2S03).",
+   context: "Identifies a perspective — what the person using it was trying to do (VC2HH2S04). The wall colours this green, but at this band the curriculum calls it perspectives, not context." },
+ "Levels 3 and 4": {
+   source:  "Identifies the features and content of a historical source, and names where it was found (VC2HH4S03).",
+   context: "Describes the perspective of people in the past, using evidence from the object itself (VC2HH4S04).",
+   evidence:"Describes two different historical interpretations of the same object (VC2HH4S05)." }
 };
 
-/* What is new at each rung, and what a student has to know to make the jump.
-   Both are shown on bump-it-up.html, the background knowledge behind a toggle. */
+/* The descriptors each rung actually meets, quoted from the Victorian
+   Curriculum 2.0 History sub-strand "Using historical sources". That document
+   runs Foundation to Level 6 only, so the rungs above it carry no code — the
+   Year 7-10 wording comes from the school's own continuum. */
+const VC = {
+ "Foundation to Level 2": [
+  ["VC2HH2S03","identify the features and content of sources"],
+  ["VC2HH2S04","identify perspectives of people in the past or present in sources"]],
+ "Levels 3 and 4": [
+  ["VC2HH4S03","identify the features and content of historical sources"],
+  ["VC2HH4S04","describe perspectives of people from the past based on evidence from primary sources"],
+  ["VC2HH4S05","describe different historical interpretations"]],
+ "Grade 5": [
+  ["VC2HH6S03","describe the features, content and context of historical sources"],
+  ["VC2HH6S04","describe the value of sources for use as evidence to identify historical significance and continuity and change"],
+  ["VC2HH6S05","describe historical perspectives and identify beliefs, values and attitudes of people and groups based on evidence from primary sources"],
+  ["VC2HH6S06","explain different historical interpretations"]],
+ "Year 6": [
+  ["VC2HH6S03","describe the features, content and context of historical sources"],
+  ["VC2HH6S04","describe the value of sources for use as evidence to identify historical significance and continuity and change"],
+  ["VC2HH6S05","describe historical perspectives and identify beliefs, values and attitudes of people and groups based on evidence from primary sources"],
+  ["VC2HH6S06","explain different historical interpretations"]]
+};
+const VC_NOTE = "Above Level 6 this document does not apply. The Year 7–10 wording is the school's own continuum.";
+
 const BUMP = {
- "Prep":    { new:"You name the object, and one thing you can see on it.",
-              background:"That old objects can tell us about people who lived before us." },
- "Year 1":  { new:"You say what it was used for.",
-              background:"That a tool is something people use to get a job done." },
- "Year 2":  { new:"You name the place, and you say one thing the rock cannot tell us.",
-              background:"That Madjedbebe is a real place, and that grinding turns hard seeds into food." },
- "Year 3":  { new:"You say that the people who study the past do not all agree.",
-              background:"That experts can look at the same object and reach different conclusions." },
- "Year 4":  { new:"You check your own writing, and you give a reason for each side of the argument.",
-              background:"That soil builds up in layers, and things buried deeper are usually older." },
- "Grade 5": { new:"You choose careful words, like ‘may have’, so you do not claim too much.",
-              background:"The difference between what you can see and what you are working out." },
- "Year 6":  { new:"You name the type of source, and you give both positions on its age.",
-              background:"That archaeologists date the layer the object sat in, not the object itself." },
- "Year 7":  { new:"You separate the ancient object from the modern record of it, and you say why that record was made.",
-              background:"That a scientific figure is made by researchers for a purpose, and that 65,000 years is the modelled age of the layer." },
- "Year 8":  { new:"You attach each interpretation to the evidence behind it, and you ask reliability questions.",
-              background:"That Clarkson and Williams disagree about how the site formed, and that residues can be contaminated by modern material." },
- "Year 9":  { new:"You explain why several kinds of evidence together are stronger than one, and you rank your claims.",
-              background:"What independent evidence means, and that what survives in the ground depends on preservation." },
- "Year 10": { new:"You read the argument the publication is making underneath its evidence, and you explain why the experts differ.",
-              background:"That researchers' values shape their work, and that permission from Mirarr custodians is part of how this research was done." }
+ "Foundation to Level 2": {
+   new:"You name what you can see on the source, and what the person was doing with it.",
+   background:"That the marks on an object were put there by someone, on purpose." },
+ "Levels 3 and 4": {
+   new:"You name the place it came from, and you say that researchers do not all agree about it.",
+   background:"That researchers can look at the same object and reach different conclusions." },
+ "Grade 5": {
+   new:"Three things switch on at once: you place the source in its time, you judge what it is useful for, and you choose careful words like ‘may have’.",
+   background:"That a source can be strong evidence for one thing and weak evidence for another at the same time." },
+ "Year 6": {
+   new:"You name the type of source, and you give both positions on its age.",
+   background:"That archaeologists date the layer an object sat in, not the object itself." },
+ "Year 7": {
+   new:"You separate the ancient object from the modern record of it, and you say why that record was made.",
+   background:"That a scientific figure is made by researchers for a purpose, and that 65,000 years is the modelled age of the layer." },
+ "Year 8": {
+   new:"You attach each interpretation to the evidence behind it, and you ask reliability questions.",
+   background:"That Clarkson and Williams disagree about how the site formed, and that residues can be contaminated by modern material." },
+ "Year 9": {
+   new:"You explain why several kinds of evidence together are stronger than one, and you rank your claims.",
+   background:"What independent evidence means, and that what survives in the ground depends on preservation." },
+ "Year 10": {
+   new:"You read the argument the publication is making underneath its evidence, and you explain why the experts differ.",
+   background:"That researchers' values shape their work, and that permission from Mirarr custodians is part of how this research was done." }
 };
 
 /* Tier 3 = the subject's own words, which need a definition.
