@@ -59,8 +59,14 @@ for (const job of JOBS) {
              over: sheets.map((s, i) => ({ i, over: Math.round(s.getBoundingClientRect().height - limit) }))
                          .filter(x => x.over > 0) };
   }, px(box.h));
-  await page.emulateMedia({ media: "screen" });
+  /* Do NOT switch the media emulation back to "screen" here. Doing so leaves
+     the page in a state that makes the following pdf() lay out differently and
+     silently spill onto an extra page. The page is closed straight after. */
 
+  /* Paper size and margin both come from here — Chromium does not honour
+     `@page { size: A2 landscape }`, so preferCSSPageSize silently falls back to
+     US Letter. job.margin is kept equal to the page's own @page margin so the
+     box measured above matches the box actually printed. */
   await page.pdf({
     path: join(here, job.out),
     printBackground: true,
