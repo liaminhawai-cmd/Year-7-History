@@ -1,6 +1,1 @@
-# Build output. These are generated from content.js by build-pdf.mjs and
-# tools/build_docx.py, and are committed in the Year-7-Humanities print pack
-# rather than here, so the same PDF never lives in two repositories.
-*.pdf
-*.docx
-node_modules/
+node_modules

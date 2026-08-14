@@ -229,6 +229,6 @@ def build(subject: str) -> Path:
 
 
 if __name__ == "__main__":
-    targets = sys.argv[1:] or ["economics", "history"]
+    targets = sys.argv[1:] or ["history"]
     for t in targets:
         print("wrote", build(t).relative_to(ROOT))
