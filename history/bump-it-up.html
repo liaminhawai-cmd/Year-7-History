@@ -64,7 +64,14 @@ button{font:inherit;cursor:pointer}
             display:grid;place-items:center;pointer-events:none}
 .zoomall{border:1px solid #3b4442;background:#222927;color:#f4d98b;border-radius:.5em;
           padding:.4em .7em;font-size:.92em;font-weight:700;width:100%}
-.rockcap{color:#cfc7b8;font-size:.95em;line-height:1.4;overflow:auto;min-height:3.2em}
+.rockcap{color:#cfc7b8;font-size:.95em;line-height:1.4;overflow:auto;min-height:3.2em;flex:0 0 auto}
+.kid{background:#1b2220;border:1px solid #33403c;border-radius:.5em;padding:.6em .75em;
+     overflow:auto;min-height:0;flex:1 1 auto}
+.kid .band{display:block;font-size:.72em;font-weight:800;letter-spacing:.12em;
+           text-transform:uppercase;color:#8fa39c;margin-bottom:.35em}
+.kid ul{list-style:none;display:grid;gap:.35em}
+.kid li{color:#eae5db;font-size:.95em;line-height:1.35;padding-left:1.1em;position:relative}
+.kid li::before{content:"✓";position:absolute;left:0;color:#9fd3b4;font-weight:800}
 .rockcap b{color:#f4d98b;display:block;font-size:1.02em}
 .rockcap .idle{opacity:.6}
 
@@ -118,9 +125,11 @@ button{font:inherit;cursor:pointer}
    criterion's underline and the two patterns become unreadable — and that
    pattern is the channel that survives greyscale. Tint instead. */
 .m .g3{border-bottom:0;background:rgba(32,35,31,.09);padding:0 .12em}
-.g2{background:transparent}
-body.syn .g2{background:#e7f0d8;box-shadow:0 0 0 .1em #e7f0d8}
-body.syn .g2::after{content:" (" attr(data-syn) ")";color:var(--muted);font-size:.82em;font-style:italic}
+/* tier 2 is its own affordance: a soft tint you can always see, and each word
+   opens on its own rather than the whole page flipping at once */
+.g2{background:#e7f0d8;box-shadow:0 0 0 .09em #e7f0d8}
+.g2.on::after{content:" (" attr(data-syn) ")";color:var(--muted);font-size:.82em;font-style:italic}
+.m .g2{background:rgba(21,128,61,.13);box-shadow:none;padding:0 .12em}
 
 /* ---------- full-screen picture ---------- */
 .zoom{position:fixed;inset:0;z-index:60;background:#070a09;display:grid;
@@ -180,8 +189,8 @@ body.syn .g2::after{content:" (" attr(data-syn) ")";color:var(--muted);font-size
     <div class="rungs" id="rungs"></div>
     <div class="toggles">
       <button id="tBg"  aria-pressed="false">Background</button>
-      <button id="tVc"  aria-pressed="false">Curriculum</button>
-      <button id="tSyn" aria-pressed="false">Synonyms</button>
+      <button id="tVc"  aria-pressed="false">I can…</button>
+      
     </div>
   </div>
 
@@ -194,6 +203,7 @@ body.syn .g2::after{content:" (" attr(data-syn) ")";color:var(--muted);font-size
       </div>
       <button class="zoomall" id="zoomAll">⤢ Open the picture big</button>
       <div class="rockcap" id="rockcap"></div>
+      <div class="kid" id="kidBox" hidden></div>
     </div>
     <div class="stage" id="stage"></div>
   </div>
@@ -211,7 +221,8 @@ body.syn .g2::after{content:" (" attr(data-syn) ")";color:var(--muted);font-size
   <button class="zclose" id="zClose">✕ Close</button>
   <button class="znav zprev" id="zPrev" aria-label="Previous view">‹</button>
   <button class="znav znext" id="zNext" aria-label="Next view">›</button>
-  <div class="zstage"><div class="zwrap" id="zWrap"><img id="zImg" alt=""></div></div>
+  <div class="zstage"><div class="zwrap" id="zWrap"><img id="zImg" alt=""
+    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"></div></div>
   <div class="zcap"><b id="zTitle"></b><span id="zText"></span></div>
   <div class="zdots" id="zDots"></div>
 </div>
@@ -374,7 +385,7 @@ document.addEventListener("click", e => {
   const g3 = e.target.closest("[data-t3]");
   if (g3) return showPop("What it means", g3.textContent, GLOSS.tier3[g3.dataset.t3], null, g3);
   const g2 = e.target.closest("[data-t2]");
-  if (g2) return showPop("Another way to say it", g2.textContent, GLOSS.tier2[g2.dataset.t2], null, g2);
+  if (g2){ g2.classList.toggle("on"); hidePop(); return; }
   const m = e.target.closest("[data-crit]");
   if (m) {
     const c = critOf(m.dataset.crit), lv = LADDER[i];
@@ -402,11 +413,12 @@ function render(){
   const stage = el("stage");
   if (i === -1){
     el("rungName").textContent = "The source";
+    syncKid();
     stage.classList.remove("small");
     stage.innerHTML =
       `<div class="inquiry">${esc(WALL.inquiry)}</div>
        <p class="crumbs">Everything underlined can be tapped. Dotted words are subject words with a
-          definition; turn on <b>Synonyms</b> for the everyday meaning of the harder general words.</p>
+          definition; the green words open an everyday meaning when you tap them.</p>
        <div class="facts">${FACTS.map(([h,t])=>
           `<div class="fact"><b>${esc(h)}</b>${linkGloss(t)}</div>`).join("")}</div>`;
     return;
@@ -421,10 +433,6 @@ function render(){
     `<h2><span class="of">Rung ${i+1} of ${LADDER.length}</span>${esc(lv)}</h2>
      ${b.new ? `<div class="newbar"><span>New at this rung</span>${esc(b.new)}</div>` : ""}
      ${b.background ? `<div class="bg" id="bgBox" hidden><span>You need to know</span>${esc(b.background)}</div>` : ""}
-     <div class="vc" id="vcBox" hidden><span>Victorian Curriculum · using historical sources</span>${
-        (typeof VC !== "undefined" && VC[lv])
-          ? "<ul>" + VC[lv].map(([code,d]) => `<li><code>${esc(code)}</code> ${esc(d)}</li>`).join("") + "</ul>"
-          : `<div class="none">${esc(typeof VC_NOTE !== "undefined" ? VC_NOTE : "")}</div>`}</div>
      <p class="example">${marked(ex)}</p>
      <p class="crumbs">Tap any underlined phrase to see what it proves.</p>`;
   syncBg();
@@ -437,8 +445,16 @@ let baseK = 1;
 function fit(){
   const st = el("stage");
   st.style.setProperty("--sk", "1");
-  if (!st.querySelector(".example")) return;
   const over = ()=> st.scrollHeight > st.clientHeight;
+  /* the source stage has no worked example, but it still has to fit */
+  if (!st.querySelector(".example")){
+    let s0 = 1;
+    for (let g = 0; g < 40 && over() && s0 > 0.6; g++){
+      s0 *= 0.96;
+      st.style.setProperty("--sk", s0.toFixed(3));
+    }
+    return;
+  }
   /* first shrink just the worked example, which is the part with slack */
   let k = baseK;
   st.style.setProperty("--k", k.toFixed(3));
@@ -458,9 +474,22 @@ function fit(){
 function syncBg(){
   const box = el("bgBox");
   if (box) box.hidden = el("tBg").getAttribute("aria-pressed") !== "true";
-  const vc = el("vcBox");
-  if (vc) vc.hidden = el("tVc").getAttribute("aria-pressed") !== "true";
+  syncKid();
   fit();
+}
+
+/* the "I can ..." box lives beside the rock, not in the stage, so it never
+   competes with the worked example for room */
+function syncKid(){
+  const box = el("kidBox");
+  const lv = LADDER[i];
+  const k = (typeof KID !== "undefined" && KID[lv]) || null;
+  const on = el("tVc").getAttribute("aria-pressed") === "true";
+  box.hidden = !(on && k);
+  if (!box.hidden){
+    box.innerHTML = `<span class="band">${esc(k.band)}</span><ul>` +
+      k.lines.map(l => `<li>${esc(l)}</li>`).join("") + "</ul>";
+  }
 }
 el("tBg").onclick = ()=>{
   const on = el("tBg").getAttribute("aria-pressed") === "true";
@@ -470,13 +499,9 @@ el("tBg").onclick = ()=>{
 el("tVc").onclick = ()=>{
   const on = el("tVc").getAttribute("aria-pressed") === "true";
   el("tVc").setAttribute("aria-pressed", String(!on));
-  syncBg();
+  syncKid(); fit();
 };
-el("tSyn").onclick = ()=>{
-  const on = el("tSyn").getAttribute("aria-pressed") === "true";
-  el("tSyn").setAttribute("aria-pressed", String(!on));
-  document.body.classList.toggle("syn", !on);
-};
+
 el("prev").onclick = ()=>{ if (i > -1){ i--; render(); } };
 el("next").onclick = ()=>{ if (i < LADDER.length-1){ i++; render(); } };
 document.addEventListener("keydown", e => {

@@ -26,9 +26,6 @@ const CRITERIA = [
   { key:"decisions",  row:"Business decisions",
     name:"Business decisions",   glyph:"●", line:"dotted",
     blurb:"Costs, benefits, risks, and the effects a decision has — intended and unintended." },
-  { key:"meta",       row:"Metacognition",
-    name:"Metacognition",        glyph:"◆", line:"wavy",
-    blurb:"Naming your own contribution, then checking, adjusting and justifying your strategy." }
 ];
 
 const LEVELS = ["Level 6","Level 7","Level 8","Level 9","Level 10"];
@@ -43,19 +40,19 @@ const MOVE = {
 
 const EXAMPLES = {
 "Level 6":
-`We started Pigeon Patrol so we could {success|remove pigeons safely from eating areas} and students could use the space. We tried {innovation|fake hawk kites and scent gel} because we didn’t want to harm the birds. We chose {decisions|cheap netting instead of metal spikes so the school could afford it}. After asking teachers and students what changed, {meta|I wrote down what we would adjust next time}.`,
+`We started Pigeon Patrol so we could {success|remove pigeons safely from eating areas} and students could use the space. We tried {innovation|fake hawk kites and scent gel} because we didn’t want to harm the birds. We chose {decisions|cheap netting instead of metal spikes so the school could afford it}.`,
 
 "Level 7":
-`We noticed pigeons were ruining lunch spots, so we offered a service the school could {success|book and pay for}. We tested {innovation|hawk kites, scent gel, and frisbees}; frisbees were {decisions|$0} but someone had to keep throwing them, while gel cost {decisions|$15} but worked all day. We considered rocks (also free) but rejected it because {decisions|one broken window could cost hundreds}. {meta|I handled the customer survey and noted what worked}.`,
+`We noticed pigeons were ruining lunch spots, so we offered a service the school could {success|book and pay for}. We tested {innovation|hawk kites, scent gel, and frisbees}; frisbees were {decisions|$0} but someone had to keep throwing them, while gel cost {decisions|$15} but worked all day. We considered rocks (also free) but rejected it because {decisions|one broken window could cost hundreds}.`,
 
 "Level 8":
-`We ran two one-week trials and recorded results, then {innovation|changed our plan based on what the data showed (gel near bins + netting at the worst corner)}. The result was {success|fewer lunchtime complaints and a cleaner area}, but gel near bins needed signage so students didn’t touch it. We identified {decisions|risks like injury or property damage and reduced them with clear rules}. {meta|Next time I would collect data for longer and write clearer instructions for helpers}.`,
+`We ran two one-week trials and recorded results, then {innovation|changed our plan based on what the data showed (gel near bins + netting at the worst corner)}. The result was {success|fewer lunchtime complaints and a cleaner area}, but gel near bins needed signage so students didn’t touch it. We identified {decisions|risks like injury or property damage and reduced them with clear rules}.`,
 
 "Level 9":
-`Other pest-control businesses could offer the same service, so we offered a {success|“no-poo guarantee” and faster response packages}. We knew another school was already using scent gel and netting, so we copied that and used {innovation|gel near bins plus netting in the corner pigeons treated like a VIP lounge}. At first we assumed a stronger guarantee would win everyone over, but {meta|after tracking call-outs we capped the free returns}. We weighed benefits (trust, repeat bookings) against costs like {decisions|free call-outs, staff time, and extra labour}. We priced the guarantee higher to cover that labour but noted it might reduce demand from smaller schools.`,
+`Other pest-control businesses could offer the same service, so we offered a {success|“no-poo guarantee” and faster response packages}. We knew another school was already using scent gel and netting, so we copied that and used {innovation|gel near bins plus netting in the corner pigeons treated like a VIP lounge}. We weighed benefits (trust, repeat bookings) against costs like {decisions|free call-outs, staff time, and extra labour}. We priced the guarantee higher to cover that labour but noted it might reduce demand from smaller schools.`,
 
 "Level 10":
-`To maintain our edge, we {success|tracked outcomes across multiple schools each term} (how long pigeon numbers stayed low, and how many follow-up visits were needed). {meta|We decided our criteria were effectiveness over time, staff workload, and cost per school per term}. We used a simple {decisions|cost–benefit analysis}: better equipment cost {decisions|$600} upfront, but reduced repeat visits by {decisions|2 per school per term}. If a repeat visit costs {decisions|$80}, that’s {decisions|$160 saved per school per term}. When those savings didn’t show up at smaller schools, {meta|we adjusted the service instead of buying more gear}. We kept improving it with {innovation|new signage, better scheduling, and improved packages} so customers stayed happy.`
+`To maintain our edge, we {success|tracked outcomes across multiple schools each term} (how long pigeon numbers stayed low, and how many follow-up visits were needed). We used a simple {decisions|cost–benefit analysis}: better equipment cost {decisions|$600} upfront, but reduced repeat visits by {decisions|2 per school per term}. If a repeat visit costs {decisions|$80}, that’s {decisions|$160 saved per school per term}. We kept improving it with {innovation|new signage, better scheduling, and improved packages} so customers stayed happy.`
 };
 
 /* One entry per criterion, in criterion order, so the column reads straight
@@ -66,40 +63,35 @@ const EXPLANATIONS = {
   items:{
     success:    ["Business success", "states the purpose and identifies this as a service (not a good)."],
     innovation: ["Innovation", "a trial is present, but it is not explained as a process."],
-    decisions:  ["Business decisions", "includes one decision with an effect (affordability → netting choice)."],
-    meta:       ["Metacognition", "feedback is collected, but the personal contribution is not specified."]
+    decisions:  ["Business decisions", "includes one decision with an effect (affordability → netting choice)."]
   }, notYet:"" },
 
 "Level 7": {
   items:{
     success:    ["Business success", "uses a real problem + willingness to pay."],
     innovation: ["Entrepreneurship", "shows initiative and risk (pitching / organising)."],
-    decisions:  ["Business decisions", "describes costs and benefits with concrete comparisons ($0 vs $15; window damage)."],
-    meta:       ["Metacognition", "explicitly identifies the personal contribution."]
+    decisions:  ["Business decisions", "describes costs and benefits with concrete comparisons ($0 vs $15; window damage)."]
   }, notYet:"Discusses costs and benefits, but does not yet show systematic testing over time or broader consequences." },
 
 "Level 8": {
   items:{
     success:    ["Business success", "links actions to outcomes (complaints / cleanliness)."],
     innovation: ["Entrepreneur contribution", "shows the service being improved on the basis of evidence."],
-    decisions:  ["Business decisions", "explains costs and benefits including the effects and potential consequences (signage, rules, risks)."],
-    meta:       ["Metacognition", "reflects and names a specific improvement."]
+    decisions:  ["Business decisions", "explains costs and benefits including the effects and potential consequences (signage, rules, risks)."]
   }, notYet:"Explains consequences, but does not yet evaluate market competition or strategic trade-offs." },
 
 "Level 9": {
   items:{
     success:    ["Competitive advantage", "describes why differentiation matters in a competitive market."],
     innovation: ["Innovation", "explains innovation as iterative improvement and combination, not invention."],
-    decisions:  ["Business decisions", "evaluates intended benefits against unintended effects (free call-outs, time, demand)."],
-    meta:       ["Metacognition", "shows strategies being selected, monitored and adjusted — the assumption is revised after tracking call-outs."]
+    decisions:  ["Business decisions", "evaluates intended benefits against unintended effects (free call-outs, time, demand)."]
   }, notYet:"Evaluates consequences, but does not yet justify with a full numerical cost–benefit calculation across contexts." },
 
 "Level 10": {
   items:{
     success:    ["Maintaining advantage", "uses longitudinal tracking across schools."],
     innovation: ["Innovation in the real world", "connects ongoing improvement to how service businesses succeed beyond school scenarios."],
-    decisions:  ["Cost–benefit analysis", "justifies an investment with numbers and payback logic."],
-    meta:       ["Metacognition", "develops and refines criteria for viability and sustainability, and adapts the plan when the evidence changes by context."]
+    decisions:  ["Cost–benefit analysis", "justifies an investment with numbers and payback logic."]
   }, notYet:"" }
 };
 
@@ -122,12 +114,6 @@ decisions:{
  "Level 8":"I can explain the costs and benefits of different business decisions, including the effects and potential consequences of these actions.",
  "Level 9":"I can evaluate the costs and benefits of different business decisions, including the intended and unintended effects and potential consequences of these actions.",
  "Level 10":"I can use cost-benefit analysis to justify business decisions."},
-meta:{
- "Level 6":"I can identify how I contributed to the group task.",
- "Level 7":"I can reflect on my participation in the group task.",
- "Level 8":"I can reflect on my participation in the group task and describe areas for improvement.",
- "Level 9":"I can explain how I selected, monitored and adjusted strategies during the task, and how evidence changed my thinking.",
- "Level 10":"I can explain how I developed and refined criteria to judge whether decisions were viable and sustainable over time."}
 };
 
 /* The continuum row is genuinely blank here in the curriculum, so the cell
@@ -143,8 +129,8 @@ const GAP_TEXT = "Not on the continuum until Level 7.";
    --------------------------------------------------------------------------- */
 
 const FRAME = {
-  name: "P · I · D · M",
-  blurb: "The four steps are the four criteria, in the order you write them. Reading down the wall is the same as writing the answer.",
+  name: "P · I · D",
+  blurb: "The three steps are the three criteria, in the order you write them. Reading down the wall is the same as writing the answer.",
   steps: [
     { key:"success", letter:"P", title:"Purpose",
       job:"Say what the business is for, and what makes it work.",
@@ -173,14 +159,6 @@ const FRAME = {
              "We considered ___ but rejected it because ___.",
              "We weighed ___ against costs like ___."] },
 
-    { key:"meta", letter:"M", title:"My part",
-      job:"Name your own contribution, then what you would change and why.",
-      guide:"“We” hides you. Use “I” for the part you did. Then name the adjustment, and the evidence that prompted it.",
-      warn:"Everyone worked really well as a team.",
-      warnWhy:"That is a compliment, not a contribution. What did you do?",
-      stems:["I handled ___ and noted ___.",
-             "Next time I would ___.",
-             "After tracking ___, we ___."] }
   ]
 };
 

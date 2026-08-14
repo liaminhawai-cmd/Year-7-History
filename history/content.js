@@ -30,29 +30,28 @@ const CRITERIA = [
   { key:"context",  row:"Historical context",                    name:"Historical context",                    glyph:"▲" },
   { key:"evidence", row:"Historical interpretations",            name:"Historical interpretations",            glyph:"●" },
   { key:"judge",    row:"Accuracy, usefulness &amp; reliability", name:"Accuracy, usefulness &amp; reliability", glyph:"◆" },
-  { key:"meta",     row:"Metacognition",                         name:"Metacognition",                         glyph:"★" }
 ];
 
 const LEVELS = ["Grade 5","Year 6","Year 7","Year 8","Year 9","Year 10"];
 
 const EXAMPLES = {
 "Grade 5":
-`GS73 is a {source|stone source} found at Madjedbebe. I can see {source|deep grooves} and {source|shiny patches}. It comes from {context|ancient Australia} and may have been used for grinding. Researchers {evidence|disagree about exactly how old its soil layer is}. The stone is {judge|useful for showing tool use}, but it {judge|cannot tell us the user’s name}. I checked my answer and {meta|added the words ‘may have’} because the source does not prove everything.`,
+`GS73 is a {source|stone source} found at Madjedbebe. I can see {source|deep grooves} and {source|shiny patches}. It comes from {context|ancient Australia} and may have been used for grinding. Researchers {evidence|disagree about exactly how old its soil layer is}. The stone is {judge|useful for showing tool use}, but it {judge|cannot tell us the user’s name}.`,
 
 "Year 6":
-`GS73 is a {source|stone tool}: a {source|broken piece of a grinding stone} from Madjedbebe, on Mirarr Country. Photographs show {source|deep grooves and shiny, polished patches}. People were living there {context|many thousands of years ago}, and they {context|used stones like this one to grind their food}. Some archaeologists believe {evidence|the layer is about 65,000 years old}. Others believe {evidence|the soil has moved, so the date is not certain}. The stone is {judge|useful evidence that people were grinding materials}, but it {judge|cannot tell us which plants they were grinding}. I {meta|divided the task into four smaller parts} and finished one part at a time.`,
+`GS73 is a {source|stone tool}: a {source|broken piece of a grinding stone} from Madjedbebe, on Mirarr Country. Photographs show {source|deep grooves and shiny, polished patches}. People were living there {context|many thousands of years ago}, and they {context|used stones like this one to grind their food}. Some archaeologists believe {evidence|the layer is about 65,000 years old}. Others believe {evidence|the soil has moved, so the date is not certain}. The stone is {judge|useful evidence that people were grinding materials}, but it {judge|cannot tell us which plants they were grinding}.`,
 
 "Year 7":
-`The ancient object is GS73, {source|a broken piece of a sandstone grinding stone} excavated at {source|Madjedbebe, on Mirarr Country}. The modern source is {source|a set of photographs published by Hayes and her team in 2022}. Their purpose was to {source|record the wear and argue that people ground food there for a very long time}. In ancient Australia, {context|grinding allowed people to eat hard seeds and tough plants}. It also shows {context|they understood the resources around them}. Hayes and her team {evidence|interpret this as plant processing}, because the stone carries {evidence|deep grooves, microscopic polish and 41 starch grains}. Other researchers {evidence|question how old the layer really is}. GS73 is {judge|very useful for studying how people prepared food}, because {judge|its shape, its wear and its plant traces all agree}, but it cannot tell us {judge|which plant was ground}. When I reviewed my answer I {meta|changed ‘proves’ to ‘supports’}, and {meta|separated the well-supported part from the part that is still argued about}.`,
+`The ancient object is GS73, {source|a broken piece of a sandstone grinding stone} excavated at {source|Madjedbebe, on Mirarr Country}. The modern source is {source|a set of photographs published by Hayes and her team in 2022}. Their purpose was to {source|record the wear and argue that people ground food there for a very long time}. In ancient Australia, {context|grinding allowed people to eat hard seeds and tough plants}. It also shows {context|they understood the resources around them}. Hayes and her team {evidence|interpret this as plant processing}, because the stone carries {evidence|deep grooves, microscopic polish and 41 starch grains}. Other researchers {evidence|question how old the layer really is}. GS73 is {judge|very useful for studying how people prepared food}, because {judge|its shape, its wear and its plant traces all agree}, but it cannot tell us {judge|which plant was ground}.`,
 
 "Year 8":
-`GS73 is {source|a broken millstone} recovered from {source|Phase 2, one of the oldest occupation layers at Madjedbebe}. Hayes and her team {source|photographed it and examined it under a microscope}. They published the images so that {source|other researchers could inspect the same evidence and judge their interpretation}. Madjedbebe is {context|a rock shelter on Mirarr Country that was occupied for many thousands of years}. The grinding marks show that {context|people were already preparing plant foods early in Aboriginal history}. Hayes explains {evidence|the wear and the plant residues as signs of seed grinding}. Clarkson argues that {evidence|the artefacts remained where they were dropped, which supports the early date}. Williams points to {evidence|termite activity and moving sediment, which would make that date less reliable}. The {judge|shape, the microscopic wear, the starch and the plant chemicals all point in the same direction}, so the grinding interpretation is well supported. Even so, I would ask whether {judge|the residues could be contaminated, and whether the layer could have shifted}. Next time I will {meta|check which tests support each other independently} and {meta|record the questions that remain unresolved}.`,
+`GS73 is {source|a broken millstone} recovered from {source|Phase 2, one of the oldest occupation layers at Madjedbebe}. Hayes and her team {source|photographed it and examined it under a microscope}. They published the images so that {source|other researchers could inspect the same evidence and judge their interpretation}. Madjedbebe is {context|a rock shelter on Mirarr Country that was occupied for many thousands of years}. The grinding marks show that {context|people were already preparing plant foods early in Aboriginal history}. Hayes explains {evidence|the wear and the plant residues as signs of seed grinding}. Clarkson argues that {evidence|the artefacts remained where they were dropped, which supports the early date}. Williams points to {evidence|termite activity and moving sediment, which would make that date less reliable}. The {judge|shape, the microscopic wear, the starch and the plant chemicals all point in the same direction}, so the grinding interpretation is well supported. Even so, I would ask whether {judge|the residues could be contaminated, and whether the layer could have shifted}.`,
 
 "Year 9":
-`GS73 is {source|material evidence, excavated from a recorded layer called Phase 2}. Hayes and her team published {source|photographs, microscope images and laboratory results together}. They did this because {source|one form of evidence alone would not convince a scientific audience}. The study belongs to {context|wider research into the deep history of Aboriginal Australia}, and it was carried out {context|with the permission of Mirarr custodians}. Hayes analyses {evidence|the grooves, the polish and the plant residues as evidence of seed processing}. Clarkson analyses {evidence|the condition of the site and the dating to defend the early chronology}. Williams uses {evidence|signs of termite disturbance and sediment movement to challenge it}. Because the wear and the residues agree independently, {judge|grinding is the interpretation I would trust most}. The exact plant and the precise age are {judge|weaker, because both depend on preservation and on how stable the deposit is}. While writing, I {meta|monitored that I was listing evidence rather than comparing it}, and I {meta|rewrote my ending as a judgement}.`,
+`GS73 is {source|material evidence, excavated from a recorded layer called Phase 2}. Hayes and her team published {source|photographs, microscope images and laboratory results together}. They did this because {source|one form of evidence alone would not convince a scientific audience}. The study belongs to {context|wider research into the deep history of Aboriginal Australia}, and it was carried out {context|with the permission of Mirarr custodians}. Hayes analyses {evidence|the grooves, the polish and the plant residues as evidence of seed processing}. Clarkson analyses {evidence|the condition of the site and the dating to defend the early chronology}. Williams uses {evidence|signs of termite disturbance and sediment movement to challenge it}. Because the wear and the residues agree independently, {judge|grinding is the interpretation I would trust most}. The exact plant and the precise age are {judge|weaker, because both depend on preservation and on how stable the deposit is}.`,
 
 "Year 10":
-`GS73 is an ancient artefact, but we meet it only through a modern scientific publication. Its explicit evidence is {source|the recorded wear and the plant residues preserved on the stone}. Its implicit argument is that {source|grinding technology in Australia is far older than earlier accounts allowed}, and that argument is aimed {source|at other archaeologists}. The investigation reflects {context|modern laboratory testing carried out with Mirarr custodians}. It also reveals what those researchers value: {context|testing claims, seeking permission, and stating honestly how certain they are}. Hayes and Clarkson accept the early chronology {evidence|because several independent records converge on it}. Williams gives {evidence|more weight to termite disturbance and sediment movement}. Their interpretations differ because {evidence|they evaluate the formation of the site differently}. Overall, GS73 is {judge|strong evidence for grinding, but only qualified evidence for a precise age}. Its main strength is {judge|that separate tests agree}; its limits are {judge|the unidentified plant, the modern plastic contamination, and the ongoing argument about the layer}. I {meta|justified relying on the interpretation that several tests supported}, then {meta|adapted my conclusion so the two claims did not sound equally certain}.`
+`GS73 is an ancient artefact, but we meet it only through a modern scientific publication. Its explicit evidence is {source|the recorded wear and the plant residues preserved on the stone}. Its implicit argument is that {source|grinding technology in Australia is far older than earlier accounts allowed}, and that argument is aimed {source|at other archaeologists}. The investigation reflects {context|modern laboratory testing carried out with Mirarr custodians}. It also reveals what those researchers value: {context|testing claims, seeking permission, and stating honestly how certain they are}. Hayes and Clarkson accept the early chronology {evidence|because several independent records converge on it}. Williams gives {evidence|more weight to termite disturbance and sediment movement}. Their interpretations differ because {evidence|they evaluate the formation of the site differently}. Overall, GS73 is {judge|strong evidence for grinding, but only qualified evidence for a precise age}. Its main strength is {judge|that separate tests agree}; its limits are {judge|the unidentified plant, the modern plastic contamination, and the ongoing argument about the layer}.`
 };
 
 const EXPLANATIONS = {
@@ -60,43 +59,37 @@ const EXPLANATIONS = {
   source:   "Names the source and two visible features: ‘stone source’, ‘deep grooves’ and ‘shiny patches’. Origin and purpose are not yet developed.",
   context:  "Places GS73 broadly in ‘ancient Australia’, but gives little detail about life or practice.",
   evidence: "Notices disagreement about the date without describing the competing arguments.",
-  judge:    "Gives one use and one limit: tool use is visible, but the user cannot be named.",
-  meta:     "Shows a real revision — adding ‘may have’ makes the inference appropriately cautious."
+  judge:    "Gives one use and one limit: tool use is visible, but the user cannot be named."
 },
 "Year 6": {
   source:   "‘Archaeological artefact’, ‘sandstone grinding-stone fragment’ and ‘grooves and polish’ identify type and features; purpose is not yet explained.",
   context:  "‘A very early period of Aboriginal occupation’ identifies the context and connects it to repeated tool use.",
   evidence: "Recognises two positions on the date, but does not yet describe the evidence behind them.",
-  judge:    "Recognises usefulness for grinding and a clear limit: the material processed cannot yet be identified.",
-  meta:     "Plans the response by breaking the task into the four historical-thinking parts shown on the wall."
+  judge:    "Recognises usefulness for grinding and a clear limit: the material processed cannot yet be identified."
 },
 "Year 7": {
   source:   "Separates the ancient object from the modern 2022 record, then identifies origin, features and why the figure was created.",
   context:  "Outlines how grinding supported plant preparation and knowledge of local resources.",
   evidence: "Describes the plant-processing interpretation and the separate challenge to the earliest date.",
-  judge:    "Concludes that converging methods make plant processing useful evidence, then bounds the claim with two limits.",
-  meta:     "Makes editing visible: ‘proves’ becomes ‘supports’, and function is separated from precise age."
+  judge:    "Concludes that converging methods make plant processing useful evidence, then bounds the claim with two limits."
 },
 "Year 8": {
   source:   "Describes the object and explains how the modern figure lets readers inspect its form, wear and residues.",
   context:  "Describes Madjedbebe, Mirarr Country and grinding within deep Aboriginal history.",
   evidence: "Explains the debate by connecting each interpretation to a different evidence base.",
-  judge:    "Compares independent evidence for function, then asks targeted reliability questions about contamination and layer movement.",
-  meta:     "Identifies which methods added independent support, and preserves the unresolved questions for further inquiry."
+  judge:    "Compares independent evidence for function, then asks targeted reliability questions about contamination and layer movement."
 },
 "Year 9": {
   source:   "Explains why the peer-reviewed figure combines several records, and which audience and argument it addresses.",
   context:  "Explains the deep-history research context and the role of Mirarr custodial permission.",
   evidence: "Analyses each interpretation through its evidence: wear and residue, site integrity and dating, or termite and sediment movement.",
-  judge:    "Identifies grinding as a stronger claim than exact plant or exact age, and explains why.",
-  meta:     "Monitors whether evidence is merely listed, then deliberately revises the list into a comparative judgement."
+  judge:    "Identifies grinding as a stronger claim than exact plant or exact age, and explains why."
 },
 "Year 10": {
   source:   "Analyses explicit evidence, the publication’s implicit argument, its purpose and its scientific audience.",
   context:  "Uses context to explain the creators’ values: empirical testing, custodial permission and careful qualification.",
   evidence: "Exposes why interpretations differ — researchers give different weight to converging records and site-formation evidence.",
-  judge:    "Weighs a strength, three limitations, and two claims that carry different degrees of certainty.",
-  meta:     "Justifies triangulation, then adapts the conclusion rather than forcing all claims to sound equally certain."
+  judge:    "Weighs a strength, three limitations, and two claims that carry different degrees of certainty."
 }
 };
 
@@ -129,13 +122,6 @@ judge:{
  "Year 8":"I can compare and contrast historical sources and ask questions about their accuracy, usefulness and reliability.",
  "Year 9":"I can compare and contrast historical sources and identify their accuracy, usefulness and reliability.",
  "Year 10":"I can compare and contrast sources and analyse their accuracy, usefulness and reliability."},
-meta:{
- "Grade 5":"I can follow a source-analysis checklist one step at a time.",
- "Year 6":"I can complete the task by breaking it into smaller parts.",
- "Year 7":"I can review and edit my work.",
- "Year 8":"I can reflect on my learning experience and processes to inform future progress.",
- "Year 9":"I can use, monitor and evaluate a variety of learning strategies.",
- "Year 10":"I can justify and adapt the source-analysis strategies that produced my strongest judgement."}
 };
 
 
@@ -180,8 +166,8 @@ const SOURCE_SHEET = {
    --------------------------------------------------------------------------- */
 
 const FRAME = {
-  name: "S · C · I · U · M",
-  blurb: "The five steps are the five criteria, in the order you write them. Reading down the wall is the same as writing the paragraph.",
+  name: "S · C · I · U",
+  blurb: "The four steps are the four criteria, in the order you write them. Reading down the wall is the same as writing the paragraph.",
   steps: [
     { key:"source", letter:"S", title:"Source",
       job:"Say what the source is, where it came from, and why it was made.",
@@ -219,14 +205,6 @@ const FRAME = {
              "However, ___ remains ___.",
              "It is strong evidence for ___, but only qualified evidence for ___."] },
 
-    { key:"meta", letter:"M", title:"My check",
-      job:"Show one thing you actually changed, and why.",
-      guide:"Name the move: a word you swapped, two claims you separated, a list you turned into a judgement. It has to be something you did, not something you plan to do.",
-      warn:"I checked my work carefully.",
-      warnWhy:"Nothing is named, so nothing is shown. What did you change?",
-      stems:["After reviewing, I changed ___ to ___.",
-             "I separated ___ from ___.",
-             "I monitored whether ___, then ___."] }
   ]
 };
 
@@ -433,3 +411,46 @@ const HOTSPOTS = [
  { x:50, y:54, w:48, h:44, label:"Microscope view s",
    text:"A second microscope view, from a different spot on the stone. Two views agreeing makes the reading stronger than one view alone." }
 ];
+
+/* The curriculum descriptors said the way a student would say them, in the
+   same "I can ..." shape as the learning continuum. The formal wording and
+   the codes stay in VC above, for the teacher. */
+const KID = {
+ "Foundation to Level 2": { band:"Foundation to Level 2", lines:[
+   "I can name the things I can see on the source.",
+   "I can say what the person was doing with it."]},
+ "Levels 3 and 4": { band:"Levels 3 and 4", lines:[
+   "I can name what I can see, and say where it was found.",
+   "I can say what the people were doing, and point to the part that shows it.",
+   "I can say that people who study the past do not all agree."]},
+ "Grade 5": { band:"Levels 5 and 6", lines:[
+   "I can say what the source is, and when and where it comes from.",
+   "I can say what the source is useful for.",
+   "I can say what people at the time believed and cared about.",
+   "I can explain why people tell the story in different ways."]},
+ "Year 6": { band:"Levels 5 and 6", lines:[
+   "I can say what the source is, and when and where it comes from.",
+   "I can say what the source is useful for.",
+   "I can say what people at the time believed and cared about.",
+   "I can explain why people tell the story in different ways."]},
+ "Year 7": { band:"School continuum", lines:[
+   "I can say where a source came from, what is in it, and why it was made.",
+   "I can say what was happening at the time.",
+   "I can describe the different ways people explain the past.",
+   "I can say how useful a source is."]},
+ "Year 8": { band:"School continuum", lines:[
+   "I can describe where a source came from, what is in it, and why it was made.",
+   "I can describe what was happening at the time.",
+   "I can explain the different ways people explain the past, and what they argue about.",
+   "I can compare sources and ask whether they are accurate and reliable."]},
+ "Year 9": { band:"School continuum", lines:[
+   "I can explain where a source came from, what is in it, and why it was made.",
+   "I can explain what was happening that made someone create it.",
+   "I can pull each explanation apart and find the evidence behind it.",
+   "I can compare sources and say how accurate and reliable they are."]},
+ "Year 10": { band:"School continuum", lines:[
+   "I can work out what a source says openly, and what it argues underneath.",
+   "I can use the time and place to explain what the maker believed and valued.",
+   "I can judge the different explanations and say why they differ.",
+   "I can compare sources and analyse how accurate and reliable they are."]}
+};
