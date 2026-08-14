@@ -15,7 +15,7 @@
   --judge:#744f91; --judge-soft:#eadff2;
   --meta:#53666b;  --meta-soft:#e2eaeb;
   /* one knob drives every size on the page, so it scales to any screen */
-  --u: clamp(11px, 0.83vw + 0.42vh, 22px);
+  --u: clamp(12px, 1.02vw + 0.5vh, 30px);
 }
 *{box-sizing:border-box;margin:0}
 html,body{height:100%}
@@ -33,12 +33,12 @@ button{font:inherit;cursor:pointer}
              text-transform:uppercase;opacity:.62}
 .rungs{display:flex;gap:.22em;flex-wrap:wrap;margin-left:auto}
 .rungs button{border:1px solid #3b4442;background:#222927;color:#cfc7b8;
-              border-radius:2em;padding:.3em .75em;font-size:.82em;font-weight:700}
+              border-radius:2em;padding:.32em .8em;font-size:.9em;font-weight:700}
 .rungs button.done{color:#9fd3b4;border-color:#3f6b52}
 .rungs button[aria-current="true"]{background:var(--paper);color:var(--deep);border-color:var(--paper)}
 .toggles{display:flex;gap:.3em}
 .toggles button{border:1px solid #3b4442;background:#222927;color:#cfc7b8;
-                border-radius:.5em;padding:.35em .8em;font-size:.82em;font-weight:700}
+                border-radius:.5em;padding:.38em .85em;font-size:.9em;font-weight:700}
 .toggles button[aria-pressed="true"]{background:var(--gold);border-color:var(--gold);color:#fff}
 
 /* ---------- main split ---------- */
@@ -62,13 +62,15 @@ button{font:inherit;cursor:pointer}
 .plate .pin{position:absolute;top:.25em;left:.3em;width:1.5em;height:1.5em;border-radius:50%;
             background:rgba(15,18,17,.85);color:#f4d98b;font-size:.72em;font-weight:800;
             display:grid;place-items:center;pointer-events:none}
-.rockcap{color:#cfc7b8;font-size:.82em;line-height:1.4;overflow:auto;min-height:3.2em}
+.zoomall{border:1px solid #3b4442;background:#222927;color:#f4d98b;border-radius:.5em;
+          padding:.4em .7em;font-size:.92em;font-weight:700;width:100%}
+.rockcap{color:#cfc7b8;font-size:.95em;line-height:1.4;overflow:auto;min-height:3.2em}
 .rockcap b{color:#f4d98b;display:block;font-size:1.02em}
 .rockcap .idle{opacity:.6}
 
 /* the stage */
 .stage{background:var(--paper);border-radius:.6em;padding:1em 1.2em;overflow:auto;min-height:0;
-       display:flex;flex-direction:column;gap:.7em}
+       display:flex;flex-direction:column;gap:.7em;font-size:calc(var(--u) * var(--sk,1))}
 .stage h2{color:var(--deep);font-size:1.9em;line-height:1.06;letter-spacing:-.015em}
 .stage h2 .of{color:var(--muted);font-size:.45em;font-weight:700;letter-spacing:.12em;
               text-transform:uppercase;display:block;margin-bottom:.15em}
@@ -82,7 +84,7 @@ button{font:inherit;cursor:pointer}
    fills the screen instead of leaving two thirds of it blank */
 .example{font-family:Georgia,"Times New Roman",serif;line-height:1.5;
          font-size:calc(1.45em * var(--k,1))}
-.crumbs{font-size:.85em;color:var(--muted)}
+.crumbs{font-size:.92em;color:var(--muted)}
 /* the actual curriculum descriptors this rung meets */
 .vc{background:#eef3f3;border-radius:.4em;padding:.5em .8em;font-size:.86em;line-height:1.4}
 .vc span{display:block;font-size:.72em;letter-spacing:.13em;text-transform:uppercase;
@@ -94,7 +96,7 @@ button{font:inherit;cursor:pointer}
 
 /* the source stage */
 .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(15em,1fr));gap:.5em}
-.fact{background:var(--band);border-radius:.45em;padding:.55em .75em;font-size:.98em;line-height:1.4}
+.fact{background:var(--band);border-radius:.45em;padding:.6em .8em;font-size:1.08em;line-height:1.4}
 .fact b{display:block;color:var(--deep);font-size:.68em;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.15em}
 .inquiry{background:var(--deep);color:var(--on-deep);border-radius:.5em;padding:.7em 1em;
          font-size:1.35em;font-weight:800;line-height:1.25}
@@ -120,6 +122,27 @@ button{font:inherit;cursor:pointer}
 body.syn .g2{background:#e7f0d8;box-shadow:0 0 0 .1em #e7f0d8}
 body.syn .g2::after{content:" (" attr(data-syn) ")";color:var(--muted);font-size:.82em;font-style:italic}
 
+/* ---------- full-screen picture ---------- */
+.zoom{position:fixed;inset:0;z-index:60;background:#070a09;display:grid;
+      grid-template-rows:1fr auto;padding:1.2em 1.4em 1em;gap:.6em}
+.zoom[hidden]{display:none}
+.zstage{position:relative;min-height:0;display:grid;place-items:center}
+.zwrap{position:relative;overflow:hidden;border-radius:.4em;background:#000}
+.zwrap img{position:absolute;display:block;max-width:none}
+.zcap{text-align:center;color:#f4f0e6;max-width:60ch;margin:0 auto}
+.zcap b{display:block;color:#f4d98b;font-size:1.9em;line-height:1.15;margin-bottom:.15em}
+.zcap span{font-size:1.25em;line-height:1.4}
+.zclose{position:absolute;top:.5em;right:.7em;z-index:2;border:1px solid #3b4442;
+        background:#161c1a;color:#f4f0e6;border-radius:.5em;padding:.3em .7em;font-size:1.2em}
+.znav{position:absolute;top:50%;transform:translateY(-50%);z-index:2;border:1px solid #3b4442;
+      background:rgba(18,22,21,.85);color:#f4f0e6;border-radius:50%;
+      width:2em;height:2em;font-size:1.8em;line-height:1;display:grid;place-items:center}
+.zprev{left:.3em} .znext{right:.3em}
+.zdots{display:flex;gap:.4em;justify-content:center}
+.zdots button{border:1px solid #3b4442;background:#222927;color:#cfc7b8;border-radius:2em;
+              padding:.3em .9em;font-size:.92em;font-weight:700}
+.zdots button[aria-current="true"]{background:#f4d98b;border-color:#f4d98b;color:#20231f}
+
 /* ---------- popup ---------- */
 .pop{position:fixed;inset:auto;z-index:40;max-width:min(46em,80vw);background:#fff;
      border-radius:.6em;box-shadow:0 1.2em 3em rgba(0,0,0,.45);padding:.9em 1.1em;display:none}
@@ -138,7 +161,7 @@ body.syn .g2::after{content:" (" attr(data-syn) ")";color:var(--muted);font-size
 .nav button{border:0;background:var(--paper);color:var(--deep);border-radius:.5em;
             padding:.45em 1.4em;font-weight:800;font-size:1.05em}
 .nav button:disabled{opacity:.35}
-.key{display:flex;gap:.7em;flex-wrap:wrap;margin-left:auto;color:#cfc7b8;font-size:.84em}
+.key{display:flex;gap:.8em;flex-wrap:wrap;margin-left:auto;color:#cfc7b8;font-size:.95em}
 .key i{font-style:normal;font-weight:700}
 .k-source{color:#6fc0da} .k-context{color:#74c288} .k-evidence{color:#e89a63}
 .k-judge{color:#bda0d8} .k-meta{color:#a3b6bb}
@@ -169,6 +192,7 @@ body.syn .g2::after{content:" (" attr(data-syn) ")";color:var(--muted);font-size
              alt="Four views of GS73: the artefact with a scale bar, its worn surface magnified, and two microscope views of polished grains.">
         <div class="missing">The picture of GS73 did not load.<br>Keep <b>gs73-source-panel.jpg</b> in the same folder as this page.</div>
       </div>
+      <button class="zoomall" id="zoomAll">⤢ Open the picture big</button>
       <div class="rockcap" id="rockcap"></div>
     </div>
     <div class="stage" id="stage"></div>
@@ -181,6 +205,15 @@ body.syn .g2::after{content:" (" attr(data-syn) ")";color:var(--muted);font-size
     </div>
     <div class="key" id="key"></div>
   </div>
+</div>
+
+<div class="zoom" id="zoom" hidden role="dialog" aria-modal="true" aria-label="Source picture, enlarged">
+  <button class="zclose" id="zClose">✕ Close</button>
+  <button class="znav zprev" id="zPrev" aria-label="Previous view">‹</button>
+  <button class="znav znext" id="zNext" aria-label="Next view">›</button>
+  <div class="zstage"><div class="zwrap" id="zWrap"><img id="zImg" alt=""></div></div>
+  <div class="zcap"><b id="zTitle"></b><span id="zText"></span></div>
+  <div class="zdots" id="zDots"></div>
 </div>
 
 <div class="pop" id="pop" role="dialog" aria-live="polite">
@@ -682,17 +715,72 @@ el("plate").insertAdjacentHTML("beforeend", HOTSPOTS.map((h,n)=>
   `<button data-h="${n}" aria-pressed="false" title="${esc(h.label)}"
      style="left:${h.x}%;top:${h.y}%;width:${h.w}%;height:${h.h}%">
      <span class="pin">${n+1}</span></button>`).join(""));
-const idleCap = `<span class="idle">Tap a part of the picture to see what it shows.</span>`;
+const idleCap = `<span class="idle">Tap a part of the picture to open it big.</span>`;
 el("rockcap").innerHTML = idleCap;
-el("plate").addEventListener("click", e => {
-  const b = e.target.closest("button[data-h]"); if (!b) return;
-  const on = b.getAttribute("aria-pressed") === "true";
-  el("plate").querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed","false"));
-  if (on) { el("rockcap").innerHTML = idleCap; return; }
-  b.setAttribute("aria-pressed","true");
-  const h = HOTSPOTS[+b.dataset.h];
-  el("rockcap").innerHTML = `<b>${esc(h.label)}</b>${esc(h.text)}`;
+/* ---------- tap the picture, it fills the screen ----------
+   VIEWS[0] is the whole plate; the rest are the four hotspot regions. A region
+   is shown by scaling the image inside an overflow box, which keeps the crop
+   exact and the aspect right without touching the file. */
+const VIEWS = [{ label:"All four views", x:0, y:0, w:100, h:100,
+   text:"The same object at four magnifications. Nothing is added between one view and the next — only the magnification changes." }]
+  .concat(HOTSPOTS);
+let zi = 0;
+
+function showZoom(n){
+  zi = (n + VIEWS.length) % VIEWS.length;
+  const v = VIEWS[zi];
+  const natW = rockImg.naturalWidth || 1272, natH = rockImg.naturalHeight || 968;
+  const wrap = el("zWrap"), img = el("zImg");
+  img.src = rockImg.currentSrc || rockImg.src;
+  /* the box is w% of the image wide, so the image is 100/w times the box */
+  img.style.width = (100 / v.w * 100) + "%";
+  img.style.left  = (-v.x / v.w * 100) + "%";
+  img.style.top   = (-v.y / v.h * 100) + "%";
+  wrap.dataset.ar = ((v.w / 100 * natW) / (v.h / 100 * natH)).toFixed(5);
+  img.alt = v.label + ". " + v.text;
+  el("zTitle").textContent = v.label;
+  el("zText").textContent  = v.text;
+  el("zDots").innerHTML = VIEWS.map((x,i)=>
+    `<button data-z="${i}" aria-current="${i===zi}">${esc(x.label)}</button>`).join("");
+  el("zDots").querySelectorAll("button").forEach(btn =>
+    btn.onclick = ()=> showZoom(+btn.dataset.z));
+  el("zoom").hidden = false;
+  sizeWrap();
+  el("zClose").focus();
+}
+
+/* Size the crop box in pixels rather than leaning on CSS aspect-ratio: the box
+   has no intrinsic size (the image inside is absolutely positioned), so in a
+   centred grid it collapses to nothing. */
+function sizeWrap(){
+  const wrap = el("zWrap");
+  const ar = parseFloat(wrap.dataset.ar || "1");
+  const box = el("zoom").querySelector(".zstage").getBoundingClientRect();
+  let w = box.width, h = w / ar;
+  if (h > box.height){ h = box.height; w = h * ar; }
+  wrap.style.width  = Math.floor(w) + "px";
+  wrap.style.height = Math.floor(h) + "px";
+}
+window.addEventListener("resize", ()=>{ if (!el("zoom").hidden) sizeWrap(); });
+const closeZoom = ()=>{ el("zoom").hidden = true; };
+el("zClose").onclick = closeZoom;
+el("zPrev").onclick = ()=> showZoom(zi - 1);
+el("zNext").onclick = ()=> showZoom(zi + 1);
+el("zoom").addEventListener("click", e => {
+  if (e.target === el("zoom") || e.target === el("zWrap")) closeZoom();
 });
+
+el("plate").addEventListener("click", e => {
+  const b = e.target.closest("button[data-h]");
+  if (!b) return;
+  const n = +b.dataset.h;
+  const h = HOTSPOTS[n];
+  el("plate").querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed","false"));
+  b.setAttribute("aria-pressed","true");
+  el("rockcap").innerHTML = `<b>${esc(h.label)}</b>${esc(h.text)}`;
+  showZoom(n + 1);                    // VIEWS[0] is the whole plate
+});
+el("zoomAll").onclick = ()=> showZoom(0);
 
 /* ---------- popup ---------- */
 const pop = el("pop");
@@ -711,7 +799,13 @@ function showPop(kind, word, body, key, anchor){
 }
 const hidePop = () => pop.classList.remove("show");
 el("popClose").onclick = hidePop;
-document.addEventListener("keydown", e => { if (e.key === "Escape") hidePop(); });
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape"){ hidePop(); closeZoom(); }
+  if (!el("zoom").hidden){
+    if (e.key === "ArrowRight"){ e.preventDefault(); showZoom(zi + 1); }
+    if (e.key === "ArrowLeft"){  e.preventDefault(); showZoom(zi - 1); }
+  }
+});
 
 document.addEventListener("click", e => {
   if (e.target.closest("#pop")) return;
@@ -780,12 +874,22 @@ function render(){
 let baseK = 1;
 function fit(){
   const st = el("stage");
+  st.style.setProperty("--sk", "1");
   if (!st.querySelector(".example")) return;
+  const over = ()=> st.scrollHeight > st.clientHeight;
+  /* first shrink just the worked example, which is the part with slack */
   let k = baseK;
   st.style.setProperty("--k", k.toFixed(3));
-  for (let guard = 0; guard < 40 && st.scrollHeight > st.clientHeight + 1 && k > 0.5; guard++){
+  for (let g = 0; g < 40 && over() && k > 0.72; g++){
     k *= 0.94;
     st.style.setProperty("--k", k.toFixed(3));
+  }
+  /* then, if the fixed panels are still too tall on their own, shrink the
+     whole stage together — everything inside is sized in em */
+  let sk = 1;
+  for (let g = 0; g < 40 && over() && sk > 0.6; g++){
+    sk *= 0.96;
+    st.style.setProperty("--sk", sk.toFixed(3));
   }
 }
 
@@ -814,7 +918,7 @@ el("tSyn").onclick = ()=>{
 el("prev").onclick = ()=>{ if (i > -1){ i--; render(); } };
 el("next").onclick = ()=>{ if (i < LADDER.length-1){ i++; render(); } };
 document.addEventListener("keydown", e => {
-  if (e.target.closest("button")) return;
+  if (e.target.closest("button") || !el("zoom").hidden) return;
   if (e.key === "ArrowRight") el("next").click();
   if (e.key === "ArrowLeft")  el("prev").click();
 });
