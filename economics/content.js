@@ -13,7 +13,7 @@ const WALL = {
   title: "Pigeon Patrol — one business, five levels",
   expected: "Level 7",
   task: "<b>The task:</b> students plan, run and evaluate a small business for the school. Every worked example below describes the <b>same</b> student business — Pigeon Patrol, a service that clears pigeons from school eating areas — written five times, once at each level of the continuum.",
-  foot: "Levels 6–10 use the Victorian Curriculum Economics and Business continuum wording, plus the Critical and Creative Thinking (metacognition) strand. <b>Level 7 is the expected level for Year 7</b> and is boxed in gold. Each criterion carries two signals — a colour <i>and</i> an underline pattern — so the wall still works photocopied in black and white. Marked with ■ ▲ ● ◆ in the explanation band for the same reason."
+  foot: "Levels 6–10 use the Victorian Curriculum Economics and Business continuum wording. <b>Level 7 is the expected level for Year 7</b> and is boxed in gold. Each criterion carries two signals — a colour <i>and</i> an underline pattern — so the wall still works photocopied in black and white. Marked with ■ ▲ ● in the explanation band for the same reason."
 };
 
 const CRITERIA = [
@@ -189,7 +189,7 @@ const BUILD = {
   stages: [
     { id:"phrase", title:"Which criterion does this phrase prove?", short:"Phrases",
       teach:"Every marked phrase on the wall is marked because it <b>proves one criterion</b>. The unmarked words around it are the glue that holds the sentence together.<br><br>Ask: <i>what is this phrase doing?</i> Naming what the business does is not the same as weighing what a decision cost. Having an idea is not the same as testing one.",
-      reteach:"Slow it down. Read the phrase on its own, without the sentence around it, and ask what job it does:<ul><li>Does it say <b>what the business is for</b> or what makes it work? → Business success.</li><li>Does it show something being <b>tried, tested or changed</b>? → Innovation &amp; entrepreneurship.</li><li>Does it give a <b>cost, a benefit or a consequence</b>? → Business decisions.</li><li>Does it describe <b>something you did to your own work</b>? → Metacognition.</li></ul>" },
+      reteach:"Slow it down. Read the phrase on its own, without the sentence around it, and ask what job it does:<ul><li>Does it say <b>what the business is for</b> or what makes it work? → Business success.</li><li>Does it show something being <b>tried, tested or changed</b>? → Innovation &amp; entrepreneurship.</li><li>Does it give a <b>cost, a benefit or a consequence</b>? → Business decisions.</li></ul>" },
 
     { id:"descriptor", title:"Which row does this descriptor belong in?", short:"Rows",
       teach:"Under the worked examples, the wall has one row per criterion. Each row runs left to right through the levels.<br><br>These are the descriptors from that grid. Put each one back in its row.",
