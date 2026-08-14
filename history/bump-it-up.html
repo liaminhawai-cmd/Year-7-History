@@ -47,8 +47,15 @@ button{font:inherit;cursor:pointer}
 /* the rock, always on screen */
 .rock{background:#0e1211;border-radius:.6em;padding:.5em;display:flex;flex-direction:column;
       gap:.45em;min-height:0}
-.plate{position:relative;flex:0 0 auto}
-.plate img{width:100%;height:auto;display:block;border-radius:.35em}
+/* The hotspots are positioned against this box, so it has to keep the plate's
+   shape even if the image itself never arrives — otherwise the buttons collapse
+   on top of the caption. */
+.plate{position:relative;flex:0 0 auto;aspect-ratio:1272/968;background:#0e1211;border-radius:.35em}
+.plate img{width:100%;height:100%;object-fit:contain;display:block;border-radius:.35em}
+.plate .missing{position:absolute;inset:0;display:none;place-items:center;text-align:center;
+                color:#cfc7b8;font-size:.8em;padding:1em;line-height:1.4}
+.plate.noimg .missing{display:grid}
+.plate.noimg button{display:none}
 .plate button{position:absolute;border:2px solid transparent;background:transparent;border-radius:.3em;padding:0}
 .plate button:hover,.plate button:focus-visible{border-color:#f4d98b;background:rgba(244,217,139,.14);outline:none}
 .plate button[aria-pressed="true"]{border-color:#f4d98b;background:rgba(244,217,139,.2)}
@@ -160,6 +167,7 @@ body.syn .g2::after{content:" (" attr(data-syn) ")";color:var(--muted);font-size
       <div class="plate" id="plate">
         <img id="rockImg" src="gs73-source-panel.jpg"
              alt="Four views of GS73: the artefact with a scale bar, its worn surface magnified, and two microscope views of polished grains.">
+        <div class="missing">The picture of GS73 did not load.<br>Keep <b>gs73-source-panel.jpg</b> in the same folder as this page.</div>
       </div>
       <div class="rockcap" id="rockcap"></div>
     </div>
@@ -227,6 +235,11 @@ const marked = text => linkGloss(
     (_,k,t) => `<span class="m m-${k}" data-crit="${k}" tabindex="0">${t}</span>`));
 
 /* ---------- the rock ---------- */
+const rockImg = el("rockImg");
+const flagMissing = ()=> el("plate").classList.add("noimg");
+rockImg.addEventListener("error", flagMissing);
+if (rockImg.complete && rockImg.naturalWidth === 0) flagMissing();
+
 el("plate").insertAdjacentHTML("beforeend", HOTSPOTS.map((h,n)=>
   `<button data-h="${n}" aria-pressed="false" title="${esc(h.label)}"
      style="left:${h.x}%;top:${h.y}%;width:${h.w}%;height:${h.h}%">
