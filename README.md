@@ -125,3 +125,34 @@ Country, custodianship and research permission are to stay visible wherever
 the source is used — which is why that line is set on the wall itself at a
 readable size, not buried in a footnote. Keep it there. Full details in
 [`history/SOURCE-NOTICE.md`](history/SOURCE-NOTICE.md).
+
+## EAL
+
+`eal.js` holds the source-analysis vocabulary — the words a student needs to do
+the task at all, as distinct from the words of any one source — with a
+definition and eighteen translations each. All three units read it, and the
+words are linked in every unit whether or not that unit's own glossary happens
+to mention them.
+
+The picker sits beside the Background and "I can…" toggles. The choice is kept
+in the browser and nothing leaves the device.
+
+**The same file feeds the vocabulary hub.** `tools/build_vocab_entries.py`
+turns it into a unit on
+[EAL-Vocabulary-Site](https://liaminhawai-cmd.github.io/EAL-Vocabulary-Site/),
+so the wall and the hub cannot teach different words:
+
+```
+python3 tools/build_vocab_entries.py ../eal-vocabulary-site
+```
+
+Morpheme translations there are reused from words already on the hub, matched on
+the morpheme **and** its meaning. Matching on the letters alone attaches the
+wrong translation in eighteen languages at once — the hub's `ist` meaning "to
+stand" is not the `ist` in *archaeologist*.
+
+**The translations are machine-drafted and unreviewed.** They are labelled as
+such on screen, every time one is shown. Traditional and Simplified Chinese are
+written as separate values with Taiwan and Mainland wording rather than
+character conversion, but the vocabulary site's rule is that translations must
+be *reviewed*, and these are not yet.

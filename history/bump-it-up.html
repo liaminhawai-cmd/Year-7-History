@@ -37,6 +37,12 @@ button{font:inherit;cursor:pointer}
 .toggles button{border:1px solid #3b4442;background:#222927;color:#cfc7b8;
                 border-radius:.5em;padding:.38em .85em;font-size:.9em;font-weight:700}
 .toggles button[aria-pressed="true"]{background:var(--gold);border-color:var(--gold);color:#fff}
+.toggles select{border:1px solid #3b4442;background:#222927;color:#cfc7b8;
+                border-radius:.5em;padding:.38em .5em;font-size:.9em;font-weight:700;font-family:inherit}
+.toggles select:not([data-on="0"]){background:var(--gold);border-color:var(--gold);color:#fff}
+.pop .tr{margin-top:.5em;padding-top:.5em;border-top:1px solid var(--line)}
+.pop .tr b{display:block;font-size:1.25em;line-height:1.3;color:var(--deep)}
+.pop .tr .warn{display:block;font-size:.74em;color:var(--muted);margin-top:.25em;font-style:italic}
 
 /* ---------- main split ---------- */
 .main{display:grid;grid-template-columns:minmax(0,31%) minmax(0,1fr);gap:.7em;min-height:0}
@@ -208,6 +214,7 @@ button{font:inherit;cursor:pointer}
     <div class="toggles">
       <button id="tBg"  aria-pressed="false">Background</button>
       <button id="tVc"  aria-pressed="false">I can…</button>
+      <select id="tLang" aria-label="Translate subject words"></select>
       
     </div>
   </div>
@@ -251,6 +258,7 @@ button{font:inherit;cursor:pointer}
   <div class="body" id="popBody"></div>
 </div>
 
+<script src="../eal.js"></script>
 <script src="content.js"></script>
 <script>
 /* Everything shown here comes from content.js. The ladder is the five early
@@ -279,6 +287,38 @@ const explOf  = lv => {
 let i = -1;                       // -1 is the source stage, which comes first
 
 el("kicker").textContent = WALL.title;
+
+/* ---------- EAL ----------
+   The table is shared across every unit and is the same table the vocabulary
+   hub is built from, so a word cannot mean one thing here and another there.
+   The choice is remembered per browser; nothing leaves the device. */
+const hasEAL = typeof EAL !== "undefined" && typeof EAL_LANGS !== "undefined";
+let lang = "";
+if (hasEAL){
+  try { lang = localStorage.getItem("wagoll-lang") || ""; } catch (e) { lang = ""; }
+  const sel = el("tLang");
+  sel.innerHTML = '<option value="">Translate…</option>' +
+    EAL_LANGS.map(l => `<option value="${l.code}">${esc(l.label)} · ${esc(l.english)}</option>`).join("");
+  sel.value = lang;
+  sel.dataset.on = lang ? "1" : "0";
+  sel.onchange = () => {
+    lang = sel.value;
+    sel.dataset.on = lang ? "1" : "0";
+    try { localStorage.setItem("wagoll-lang", lang); } catch (e) {}
+    hidePop();
+    render();
+  };
+} else {
+  el("tLang").hidden = true;
+}
+
+/* The shared table wins over a unit's own gloss for the words it covers, so
+   the definition a student reads is the one the hub also teaches. */
+function ealFor(term){
+  if (!hasEAL || !lang) return null;
+  const hit = EAL[String(term).toLowerCase()];
+  return hit && hit.t[lang] ? hit : null;
+}
 document.title = WALL.title + " — bump it up";
 el("key").innerHTML = CRITERIA.map(c =>
   `<span class="k-${c.key}"><i>${c.glyph}</i> ${c.name}</span>`).join("");
@@ -286,8 +326,16 @@ el("key").innerHTML = CRITERIA.map(c =>
 /* ---------- glossary linking ----------
    Longest terms first so "grinding stone" wins over "stone". Applied to plain
    text only, never inside a tag. */
-const T3 = Object.keys(GLOSS.tier3).sort((a,b)=>b.length-a.length);
+/* The shared source-analysis words are linked in every unit, not only where a
+   unit happened to gloss them — they are the words a student needs to do the
+   task at all. A word the unit already treats as tier 2 keeps its tier-2
+   behaviour rather than being marked twice. */
+const SHARED = (typeof EAL !== "undefined")
+  ? Object.keys(EAL).filter(w => !(w in GLOSS.tier3) && !(w in GLOSS.tier2))
+  : [];
+const T3 = Object.keys(GLOSS.tier3).concat(SHARED).sort((a,b)=>b.length-a.length);
 const T2 = Object.keys(GLOSS.tier2).sort((a,b)=>b.length-a.length);
+const defOf = t => (GLOSS.tier3[t]) || (typeof EAL !== "undefined" && EAL[t] && EAL[t].en) || "";
 const rx = t => new RegExp("\\b(" + t.replace(/[.*+?^${}()|[\]\\]/g,"\\$&") + ")\\b", "gi");
 
 function linkGloss(html){
@@ -486,7 +534,17 @@ document.addEventListener("keydown", e => {
 document.addEventListener("click", e => {
   if (e.target.closest("#pop")) return;
   const g3 = e.target.closest("[data-t3]");
-  if (g3) return showPop("What it means", g3.textContent, GLOSS.tier3[g3.dataset.t3], null, g3);
+  if (g3){
+    const term = g3.dataset.t3, hit = ealFor(term);
+    showPop("What it means", g3.textContent, defOf(term), null, g3);
+    if (hit){
+      const label = EAL_LANGS.find(l => l.code === lang);
+      el("popBody").insertAdjacentHTML("beforeend",
+        `<span class="tr"><b lang="${lang}">${esc(hit.t[lang])}</b>` +
+        `<span class="warn">${esc(label.label)} — ${esc(EAL_NOTE)}</span></span>`);
+    }
+    return;
+  }
   const g2 = e.target.closest("[data-t2]");
   if (g2){ g2.classList.toggle("on"); hidePop(); return; }
   const m = e.target.closest("[data-crit]");
