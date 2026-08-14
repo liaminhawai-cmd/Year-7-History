@@ -34,6 +34,10 @@ def bundle(src: Path) -> Path:
 
     html = re.sub(r'<script src="([^"]+)"></script>', inline_script, html)
 
+    def data_uri(path: Path) -> str:
+        mime = mimetypes.guess_type(path.name)[0] or "application/octet-stream"
+        return f"data:{mime};base64," + base64.b64encode(path.read_bytes()).decode("ascii")
+
     # src="something.jpg|png|..." -> data: URI
     def inline_img(m):
         attr, ref = m.group(1), m.group(2)
@@ -42,11 +46,22 @@ def bundle(src: Path) -> Path:
         path = folder / ref
         if not path.exists():
             sys.exit(f"missing image: {path}")
-        mime = mimetypes.guess_type(path.name)[0] or "application/octet-stream"
-        b64 = base64.b64encode(path.read_bytes()).decode("ascii")
-        return f'{attr}="data:{mime};base64,{b64}"'
+        return f'{attr}="{data_uri(path)}"'
 
     html = re.sub(r'(src)="([^"]+\.(?:jpg|jpeg|png|gif|webp|svg))"', inline_img, html, flags=re.I)
+
+    # The page now names its picture in content.js rather than in the markup, so
+    # the attribute pass above finds nothing. Swap any quoted filename that is a
+    # real image sitting beside the page — that is where SHEET_IMAGE lives.
+    def inline_named(m):
+        quote, ref = m.group(1), m.group(2)
+        path = folder / ref
+        if not path.exists():
+            return m.group(0)
+        return f"{quote}{data_uri(path)}{quote}"
+
+    html = re.sub(r'(["\'])([^"\'/\\]+\.(?:jpg|jpeg|png|gif|webp|svg))\1',
+                  inline_named, html, flags=re.I)
 
     left = re.findall(r'(?:src|href)="(?!data:|https?:|#)([^"]+)"', html)
     if left:

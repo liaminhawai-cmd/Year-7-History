@@ -25,11 +25,19 @@ const FACTS = [
   ["Known limits", "Two chemical peaks were identified as plastic contamination. The integrity of the Phase 2 layer is contested."]
 ];
 
+/* ink   — the colour on paper, all four above 4.5:1 on the wall's cream
+   lamp  — the same criterion on the dark bar of the big-screen tool
+   underline — the second channel, which is what survives a greyscale
+               photocopy and a colour-blind reader */
 const CRITERIA = [
-  { key:"source",   row:"Origin, features &amp; purpose",        name:"Origin, features &amp; purpose",        glyph:"■" },
-  { key:"context",  row:"Historical context",                    name:"Historical context",                    glyph:"▲" },
-  { key:"evidence", row:"Historical interpretations",            name:"Historical interpretations",            glyph:"●" },
-  { key:"judge",    row:"Accuracy, usefulness &amp; reliability", name:"Accuracy, usefulness &amp; reliability", glyph:"◆" },
+  { key:"source",   row:"Origin, features &amp; purpose",        name:"Origin, features &amp; purpose",        glyph:"■",
+    ink:"#176b87", lamp:"#6fc0da", underline:"solid" },
+  { key:"context",  row:"Historical context",                    name:"Historical context",                    glyph:"▲",
+    ink:"#357a46", lamp:"#74c288", underline:"dashed" },
+  { key:"evidence", row:"Historical interpretations",            name:"Historical interpretations",            glyph:"●",
+    ink:"#a34d1d", lamp:"#e89a63", underline:"dotted" },
+  { key:"judge",    row:"Accuracy, usefulness &amp; reliability", name:"Accuracy, usefulness &amp; reliability", glyph:"◆",
+    ink:"#744f91", lamp:"#bda0d8", underline:"double" },
 ];
 
 const LEVELS = ["Grade 5","Year 6","Year 7","Year 8","Year 9","Year 10"];
@@ -133,6 +141,19 @@ judge:{
    --------------------------------------------------------------------------- */
 
 const SHEET_IMAGE = "gs73-source-panel.jpg";
+
+/* What the big-screen tool puts in the left-hand panel. kind:"image" names a
+   file and the rectangles HOTSPOTS zoom into; kind:"text" names paragraphs and
+   the phrases to light up. */
+const SOURCE_PANEL = {
+  kind: "image",
+  file: SHEET_IMAGE,
+  ar:   "1272/968",
+  alt:  "Four views of GS73: the artefact with a scale bar, its worn surface magnified, and two microscope views of polished grains.",
+  missing: "The picture of GS73 did not load.<br>Keep <b>gs73-source-panel.jpg</b> in the same folder as this page.",
+  whole: { label:"All four views",
+    text:"The same object at four magnifications. Nothing is added between one view and the next — only the magnification changes." }
+};
 
 const SOURCE_SHEET = {
   kicker: "Ancient Australia · Source A",

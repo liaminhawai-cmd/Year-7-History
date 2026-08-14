@@ -1,36 +1,60 @@
-# Year 7 Humanities — WAGOLL walls (live site)
+# Year 7 History — WAGOLL walls (live site)
 
-The web version of the Year 7 Humanities WAGOLL walls. Everything here is a
+**[Open the site →](https://liaminhawai-cmd.github.io/Year-7-History/)**
+
+The web version of the Year 7 History WAGOLL walls. Everything here is a
 plain HTML file: no build step, no CDN, no framework. Open `index.html` and
 it works, online or from a USB stick.
+
+The other subjects have their own repositories:
+[Economics & Business](https://github.com/liaminhawai-cmd/Year-7-Economics) ·
+[Geography](https://github.com/liaminhawai-cmd/Year-7-Geography).
 
 The print versions — the A2/A3 PDFs and the editable Word walls — live in
 **[Year-7-Humanities](https://github.com/liaminhawai-cmd/Year-7-Humanities)**.
 They are generated from the same text as these pages.
 
-## Pages
+## The three units
 
-**Ancient Australia** (`history/`) — historical source analysis, Grade 5 to
-Year 10, built on GS73, a millstone fragment from Madjedbebe on Mirarr Country.
+Each unit folder is self-contained: one `content.js`, one set of pages.
 
-**Economics & Business** (`economics/`) — Levels 6 to 10, built on Pigeon
-Patrol, a student service business.
+**1 · Ancient Australia** (`history/`) — GS73, a millstone fragment from
+Madjedbebe on Mirarr Country. **An excavated object with no author.** The only
+unit with the full family of pages and the print pack.
 
-Each subject has:
+**2 · Ancient Egypt** (`egypt/`) — Herodotus on the Nile, c. 430 BCE. **A
+written source by an outsider, much of it at second hand.** *Draft.*
 
-| Page | What it is |
-|---|---|
-| `wagoll-wall.html` | the whole continuum on one surface |
-| `level-sheets.html` | one anchor sheet per level, sized to print |
-| `interactive.html` | mark the example yourself, then compare with the model |
-| `paragraph-builder.html` | one card per sentence of the answer, with stems |
-| `build-the-wall.html` | staged rounds that fill the wall in as you answer |
+**3 · Ancient Rome** (`vesuvius/`) — Pliny the Younger's letter to Tacitus on
+the eruption of Vesuvius. **A written source by a participant** — who is
+nonetheless not an eyewitness to the part that matters most. *Draft.*
 
-History also has `source-sheet.html` — the source itself, described.
+The three source types are the point of the sequence, not a coincidence: the
+questions you can ask of an object, of a visitor's report and of a
+participant's letter are different questions.
+
+| Page | Where | What it is |
+|---|---|---|
+| `bump-it-up.html` | all three | the big-screen tool: Foundation to Year 10, one rung at a time |
+| `bump-it-up-standalone.html` | all three | the same page with everything built in, for offline use |
+| `wagoll-wall.html` | unit 1 | the whole continuum on one surface |
+| `level-sheets.html` | unit 1 | one anchor sheet per level, sized to print |
+| `source-sheet.html` | unit 1 | the source itself, described |
+| `interactive.html` | unit 1 | mark the example yourself, then compare with the model |
+| `paragraph-builder.html` | unit 1 | one card per sentence of the answer, with stems |
+| `build-the-wall.html` | unit 1 | staged rounds that fill the wall in as you answer |
+
+### What "draft" means here
+
+Units 2 and 3 have been written and levelled but not taught. Their curriculum
+blocks are real — the "Using historical sources" descriptors are about the
+skill, not the topic, so all three units meet the same ones, and the codes are
+copied deliberately rather than by slip. What they do not yet have is the wall,
+the level sheets, the print pack, or a lesson behind them.
 
 ## One file holds the words
 
-Each subject folder has a single `content.js`. Every page in that folder reads
+Each unit folder has a single `content.js`. Every page in that folder reads
 it, and so do the PDF and Word builders. **Edit the wording there and it
 changes everywhere at once.** No page carries its own copy.
 
@@ -44,18 +68,23 @@ Anything you do not wrap stays black. That is deliberate — the black text is
 the glue, and it is what lets the marked phrases read as evidence rather than
 decoration.
 
-Keep each folder together: the pages load `content.js` (and, for history, the
-source image) from alongside them.
+Keep each folder together: the pages load `content.js` (and, where the source is
+a picture, the image) from alongside them. `bump-it-up.html` is byte-identical in
+all three folders — it takes its criteria, its colours and its source panel from
+`content.js`, so a unit built on a letter and a unit built on a photograph run
+the same file. Copy it across when you change it.
 
 ## Regenerating the print versions
 
 ```
 npm i -D playwright
 node history/build-pdf.mjs          # A2 wall, A3 level sheets, A3 source sheet
-node economics/build-pdf.mjs        # A3 wall, A3 level sheets
 
 pip install python-docx
-python3 tools/build_docx.py         # editable Word walls for both subjects
+python3 tools/build_docx.py         # the editable Word wall
+
+python3 tools/build_standalone.py history/bump-it-up.html \
+        egypt/bump-it-up.html vesuvius/bump-it-up.html
 ```
 
 The PDF builder measures every sheet against its printable box first and fails
